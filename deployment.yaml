@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpsink
+  labels:
+    app: httpsink
+    org: acme
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: httpsink
+  template:
+    metadata:
+      labels:
+        app: httpsink
+    spec:
+      containers:
+      - name: httpsink
+        image: quay.io/evanshortiss/httpsink:1.3.0
+        ports:
+        - containerPort: 8080
+          protocol: TCP
