@@ -1,12 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: httpsink
+  name: httpsink-copy
+  namespace: acme-apps
   labels:
     app: httpsink
     org: acme
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: httpsink
