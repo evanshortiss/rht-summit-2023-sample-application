@@ -33,7 +33,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: ./application
-        file: Containerfile
+        file: ./application/Containerfile
         push: true
         tags: |
           quay.io/evanshortiss/random-meme:latest
