@@ -3,6 +3,7 @@ name: Next Container Build
 on:
   push:
     branches: [ main ]
+    paths: ['application/**']
 
 concurrency:
   group: container-build
