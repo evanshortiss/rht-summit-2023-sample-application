@@ -1,0 +1,40 @@
+name: Next Container Build
+
+on:
+  push:
+    branches: [ main ]
+
+concurrency:
+  group: container-build
+
+jobs:
+  build-next-imgs:
+    runs-on: ubuntu-20.04
+
+    outputs:
+      git-sha: ${{ steps.git-sha.outputs.sha }}
+
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v2
+
+    - name: Set output for Git short SHA
+      id: git-sha
+      run: echo "::set-output name=sha::$(git rev-parse --short HEAD)"
+
+    - name: Login to quay.io
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.QUAY_USERNAME }}
+        password: ${{ secrets.QUAY_PASSWORD }}
+        registry: quay.io
+
+    - name: Build and push images to quay.io
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: .application/Containerfile
+        push: true
+        tags: |
+          quay.io/evanshortiss/random-meme:latest
+          quay.io/evanshortiss/random-meme:sha-${{ steps.git-sha.outputs.sha }}
