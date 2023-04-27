@@ -15,9 +15,19 @@ spec:
       labels:
         app: random-meme
     spec:
+      volumes:
+        - name: images-volume
+          configMap:
+            name: images-json
       containers:
       - name: random-meme
         image: quay.io/evanshortiss/random-meme:sha-da50318
+        volumeMounts:
+          - name: images-volume
+            mountPath: /var/images/
+        env:
+          - name: IMAGES_JSON_FILEPATH
+            value: /var/images/images.json
         resources:
           requests:
             cpu: 100m
