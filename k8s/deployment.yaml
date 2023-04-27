@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: httpsink
+  name: random-meme
   labels:
-    app: httpsink
-    org: acme
+    app: random-meme
+    app.openshift.io/runtime: nodejs
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: httpsink
+      app: random-meme
   template:
     metadata:
       labels:
-        app: httpsink
+        app: random-meme
     spec:
       containers:
-      - name: httpsink
-        image: quay.io/evanshortiss/httpsink:1.3.0
+      - name: random-meme
+        image: quay.io/evanshortiss/random-meme:sha-da50318
         resources:
           requests:
             cpu: 100m
