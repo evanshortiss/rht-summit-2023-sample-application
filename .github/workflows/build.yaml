@@ -32,8 +32,8 @@ jobs:
     - name: Build and push images to quay.io
       uses: docker/build-push-action@v2
       with:
-        context: .
-        file: .application/Containerfile
+        context: ./application
+        file: Containerfile
         push: true
         tags: |
           quay.io/evanshortiss/random-meme:latest
