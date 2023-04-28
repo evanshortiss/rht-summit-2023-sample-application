@@ -1,6 +1,8 @@
 'use strict'
 
 const log = require('barelog')
+const { Observable } = require('rxjs');
+const placeholderImage = ['https://i.imgflip.com/7jval6.jpg']
 
 /**
  * Reads the images.json file, and verifies it contains a flat array of URLs
@@ -10,6 +12,45 @@ const log = require('barelog')
 module.exports = function loadImages (filepath) {
   log(`loading images from ${filepath}`)
 
+  return new Observable((subscriber) => {
+    log('subscriber registered for image updates')
+
+    // Load the initial set of images
+    subscriber.next(getImagesArray(filepath))
+      
+    // Propagate new images once per minute (because they can change on disk)
+    setInterval(() => subscriber.next(getImagesArray(filepath)), 60 * 1000);
+  });
+}
+
+/**
+ * Returns images from disk, or a placeholder if that fails
+ * @param {string} filepath 
+ * @returns Array<string>
+ */
+function getImagesArray (filepath) {
+  try {
+    log(`loading images from disk ${filepath}`)
+
+    const images = getImagesArrayFromDisk(filepath)
+    
+    log(`successfully loaded images from ${filepath}: `, images)
+
+    return images;
+  } catch (e) {
+    log('error fetching new images from disk:', e)
+    log('using placeholder array:', placeholderImage)
+
+    return placeholderImage
+  }
+}
+
+/**
+ * Returns an array of image URLs
+ * @param{string} filepath
+ * @returns Array<string>
+ */
+function getImagesArrayFromDisk (filepath) {
   const images = require(filepath)
 
   if (!Array.isArray(images)) {
@@ -28,14 +69,13 @@ module.exports = function loadImages (filepath) {
     throw new Error(errors.join(' '))
   }
 
-  log(`successfully loaded images from ${filepath}: `, images)
-
   return images
 }
 
 /**
  * Determines if the input string is a valid URL
  * @param {string} mayBeUrl 
+ * @returns Boolean
  */
 function isValidUrl (mayBeUrl) {
   try {

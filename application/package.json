@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "barelog": "^0.2.0",
-    "env-var": "^7.3.1"
+    "env-var": "^7.3.1",
+    "rxjs": "^7.8.1"
   }
 }
