@@ -3,8 +3,21 @@
 const { readFileSync } = require('fs')
 const { join } = require('path')
 
-module.exports = function getRequestHandler(images) {
+/**
+ * Returns a request handler that renders a HTML page containing an image.
+ * @param {Observable<Array<string>>} images 
+ * @returns function
+ */
+module.exports = function getRequestHandler(imageProvider) {
+  let images = []
   const html = readFileSync(join(__dirname, 'index.html'), 'utf8')
+
+  // Subscribe for updated image lists
+  imageProvider.subscribe({
+    next(newImages) {
+      images = newImages
+    }
+  })
   
   /**
    * Handler for incoming requests

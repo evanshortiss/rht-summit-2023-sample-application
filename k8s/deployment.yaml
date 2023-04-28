@@ -21,7 +21,7 @@ spec:
             name: images-json
       containers:
       - name: random-meme
-        image: quay.io/evanshortiss/random-meme:sha-da50318
+        image: quay.io/evanshortiss/random-meme:sha-faad6ce
         volumeMounts:
           - name: images-volume
             mountPath: /var/images/
