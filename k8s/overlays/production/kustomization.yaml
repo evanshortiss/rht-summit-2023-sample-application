@@ -1,0 +1,7 @@
+nameSuffix: -production
+
+bases:
+- ../../base
+
+patchesStrategicMerge:
+- config-map.yaml

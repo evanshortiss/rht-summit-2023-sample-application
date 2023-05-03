@@ -1,0 +1,7 @@
+# This patches the base deployment to increase the replica count
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: random-meme
+spec:
+  replicas: 5

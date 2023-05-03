@@ -6,7 +6,7 @@ metadata:
     app: random-meme
     app.openshift.io/runtime: nodejs
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: random-meme
@@ -21,7 +21,19 @@ spec:
             name: images-json
       containers:
       - name: random-meme
-        image: quay.io/evanshortiss/random-meme:sha-faad6ce
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+            initialDelaySeconds: 2
+            periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+            initialDelaySeconds: 2
+            periodSeconds: 2
+        image: quay.io/evanshortiss/random-meme:latest
         volumeMounts:
           - name: images-volume
             mountPath: /var/images/

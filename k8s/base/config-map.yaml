@@ -12,3 +12,5 @@ data:
 kind: ConfigMap
 metadata:
   name: images-json
+  labels:
+    app: random-meme
