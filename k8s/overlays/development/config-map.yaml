@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  images.json: |-
+    [
+      "https://i.imgflip.com/7jqevq.jpg"
+    ]
+kind: ConfigMap
+metadata:
+  name: images-json
+  labels:
+    app: random-meme
