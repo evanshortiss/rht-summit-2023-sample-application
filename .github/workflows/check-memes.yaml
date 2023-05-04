@@ -3,10 +3,10 @@ name: Test ConfigMap Image URLs
 on:
   pull_request:
     branches: [ main ]
-    paths: ['k8s/config-map.yaml', 'test/**']
+    paths: ['k8s/**/config-map.yaml', 'test/**']
   push:
     branches: [ main ]
-    paths: ['k8s/config-map.yaml', 'test/**']
+    paths: ['k8s/**/config-map.yaml', 'test/**']
 
 defaults:
   run:
