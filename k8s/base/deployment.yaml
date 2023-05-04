@@ -25,13 +25,11 @@ spec:
           httpGet:
             path: /
             port: 8080
-            initialDelaySeconds: 2
             periodSeconds: 5
         readinessProbe:
           httpGet:
             path: /
             port: 8080
-            initialDelaySeconds: 2
             periodSeconds: 2
         image: quay.io/evanshortiss/random-meme:latest
         volumeMounts:
