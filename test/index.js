@@ -4,15 +4,17 @@ const test = require('node:test')
 const yaml = require('yamljs')
 const assert = require('assert')
 const { join } = require('path')
-const { existsSync } = require('path')
+const { existsSync } = require('fs')
 
-[
+const cms = [
   'k8s/base/config-map.yaml',
   'k8s/overlays/development/config-map.yaml',
   'k8s/overlays/production/config-map.yaml'
-].forEach((path) => {
+]
+
+cms.forEach((path) => {
   test(`Image URLs in ConfigMap (${path}) resolve to 200 OK responses with image content-type`, (t) => {
-    t.test(`Testing path ${path}`, () => {
+    return t.test(`Testing path ${path}`, (t) => {
       const fullpath = join(__dirname, '..', path)
       
       if (!existsSync(fullpath)) {
