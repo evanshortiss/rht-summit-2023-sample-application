@@ -2,7 +2,8 @@ apiVersion: v1
 data:
   images.json: |-
     [
-      "https://i.imgflip.com/7jqevq.jpg"
+      "https://i.imgflip.com/7jqevq.jpg",
+      "https://i.imgflip.com/7jqekl.jpg"
     ]
 kind: ConfigMap
 metadata:
