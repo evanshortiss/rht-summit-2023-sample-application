@@ -2,6 +2,7 @@
 
 const log = require('barelog')
 const { Observable } = require('rxjs');
+const { readFileSync } = require('node:fs');
 const placeholderImage = ['https://i.imgflip.com/7jval6.jpg']
 
 /**
@@ -51,7 +52,7 @@ function getImagesArray (filepath) {
  * @returns Array<string>
  */
 function getImagesArrayFromDisk (filepath) {
-  const images = require(filepath)
+  const images = JSON.parse(readFileSync(filepath, 'utf-8'))
 
   if (!Array.isArray(images)) {
     throw new Error('Uh oh! Looks like the images.json file wasn\'t a flat array of URLs')
