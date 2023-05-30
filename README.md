@@ -1,4 +1,6 @@
-# Red Hat Summit 2023 GitOps Sample Application
+# (Archived) Red Hat Summit 2023 GitOps Sample Application
+
+Please use the new copy of this content at: https://github.com/redhat-scholars/summit-2023-gitops-lab-sample-application
 
 This repository contains a simple Node.js application that renders a web page
 containing a randomly chosen meme.
